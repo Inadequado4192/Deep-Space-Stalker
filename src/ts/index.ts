@@ -8,19 +8,38 @@ const healthSpanElem = <HTMLElement>document.querySelector("#health > span");
 const oxygenSpanElem = <HTMLElement>document.querySelector("#oxygen > span");
 const defeatElem = <HTMLElement>document.querySelector("#defeat");
 const defeatSpanElem = <HTMLElement>document.querySelector("#defeat > span");
+const musicElem = <HTMLElement>document.querySelector("#music");
 
 const inventorySizeElem = <HTMLElement>document.querySelector("#inventorySize");
-const alienKilledElem = <HTMLElement>document.querySelector("#alienKilled");
+const killedAlienElem = <HTMLElement>document.querySelector("#killedAlien");
+
 
 
 namespace GameAudio {
     export function Hit() {
         const a = new Audio("./audio/laser.mp3");
-        a.volume = 0.2;
+        a.volume = 0.4;
+        return a;
+    }
+    export function Music() {
+        const a = new Audio("./audio/Anamnez - Звуки Космоса (AvdioTrik.com).mp3");
+        a.volume = 0.4;
         return a;
     }
 }
 
+let music = GameAudio.Music();
+musicElem.onclick = () => {
+    if (musicElem.classList.contains("muted")) {
+        musicElem.classList.remove("muted");
+        music.play();
+    } else {
+        musicElem.classList.add("muted");
+        music.loop = true;
+        music.pause();
+        music.currentTime = 0;
+    }
+}
 
 type SquarePoints = [TL: Point, TR: Point, BR: Point, BL: Point];
 class Point {
@@ -98,7 +117,7 @@ const start_btn = <HTMLElement>document.querySelector("#start_btn");
 let player: Objects.Astronaut;
 let spawnAlienInterval: number, spawnOxygenTankInterval: number;
 function start() {
-    alienKilled = 0; alienKilledElem.innerHTML = "0 - Killed aliens"; inventorySizeElem.innerHTML = "0 - Garbage collected";
+    killedAlien = 0; killedAlienElem.innerHTML = "0 - Aliens Killed"; inventorySizeElem.innerHTML = "0 - Garbage collected";
     all_objects.clear();
     Objects.Aliens.Alien.all.clear();
     gameElem.style.display = "block";
@@ -180,7 +199,10 @@ function draw(obj: Objects.Object) {
     // }
 
 
-    // ctx.strokeStyle = "red";
+
+    // ctx.filter = "blur(10px)";
+    // ctx.shadowBlur = 10;
+    // ctx.strokeStyle = "green";
     // ctx.rect(-(obj.width / 2), -(obj.height / 2), obj.width, obj.height)
     // ctx.stroke();
 
@@ -190,7 +212,7 @@ function draw(obj: Objects.Object) {
 }
 
 
-let alienKilled = 0;
+let killedAlien = 0;
 function logic(obj: Objects.GameObject) {
     if (obj instanceof Objects.Astronaut) {
         for (let o of obj.getCollisions()) {
@@ -215,7 +237,7 @@ function logic(obj: Objects.GameObject) {
             if (alien) {
                 alien.inertia.sum(obj.inertia.copy().division(100));
                 alien.hit(obj.owner);
-                alien.destroyed && (alienKilledElem.innerHTML = `${++alienKilled} - Killed aliens`);
+                alien.destroyed && (killedAlienElem.innerHTML = `${++killedAlien} - Aliens Killed`);
                 obj.delete();
             }
         } else if (obj.owner instanceof Objects.Aliens.Alien) {

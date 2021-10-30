@@ -8,8 +8,9 @@ const healthSpanElem = document.querySelector("#health > span");
 const oxygenSpanElem = document.querySelector("#oxygen > span");
 const defeatElem = document.querySelector("#defeat");
 const defeatSpanElem = document.querySelector("#defeat > span");
+const musicElem = document.querySelector("#music");
 const inventorySizeElem = document.querySelector("#inventorySize");
-const alienKilledElem = document.querySelector("#alienKilled");
+const killedAlienElem = document.querySelector("#killedAlien");
 var GameAudio;
 (function (GameAudio) {
     function Hit() {
@@ -18,7 +19,26 @@ var GameAudio;
         return a;
     }
     GameAudio.Hit = Hit;
+    function Music() {
+        const a = new Audio("./audio/Anamnez - Звуки Космоса (AvdioTrik.com).mp3");
+        a.volume = 0.2;
+        return a;
+    }
+    GameAudio.Music = Music;
 })(GameAudio || (GameAudio = {}));
+let music = GameAudio.Music();
+musicElem.onclick = () => {
+    if (musicElem.classList.contains("muted")) {
+        musicElem.classList.remove("muted");
+        music.play();
+    }
+    else {
+        musicElem.classList.add("muted");
+        music.loop = true;
+        music.pause();
+        music.currentTime = 0;
+    }
+};
 class Point {
     constructor(x, y) {
         this.x = x;
@@ -81,8 +101,8 @@ const start_btn = document.querySelector("#start_btn");
 let player;
 let spawnAlienInterval, spawnOxygenTankInterval;
 function start() {
-    alienKilled = 0;
-    alienKilledElem.innerHTML = "0 - Killed aliens";
+    killedAlien = 0;
+    killedAlienElem.innerHTML = "0 - Aliens Killed";
     inventorySizeElem.innerHTML = "0 - Garbage collected";
     all_objects.clear();
     Objects.Aliens.Alien.all.clear();
@@ -145,7 +165,7 @@ function draw(obj) {
     ctx.closePath();
     ctx.restore();
 }
-let alienKilled = 0;
+let killedAlien = 0;
 function logic(obj) {
     if (obj instanceof Objects.Astronaut) {
         for (let o of obj.getCollisions()) {
@@ -171,7 +191,7 @@ function logic(obj) {
             if (alien) {
                 alien.inertia.sum(obj.inertia.copy().division(100));
                 alien.hit(obj.owner);
-                alien.destroyed && (alienKilledElem.innerHTML = `${++alienKilled} - Killed aliens`);
+                alien.destroyed && (killedAlienElem.innerHTML = `${++killedAlien} - Aliens Killed`);
                 obj.delete();
             }
         }

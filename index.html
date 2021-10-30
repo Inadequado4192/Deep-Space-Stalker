@@ -11,17 +11,22 @@
 
 <body>
     <div id="menu">
-        <button id="start_btn" style="display: block;">Start</button>
+        <div id="music" class="muted">
+            <img src="./music.png" alt="music"></img>
+        </div>
+        <h1>Deep Space Stalker</h1>
+        <button id="start_btn">Start</button>
+        <button id="tutorial">Tutorial</button>
     </div>
     <div id="game" style="display: none;">
         <canvas id="c"></canvas>
         <div id="stats">
-            <div id="inventorySize">0 - Garbage collected</div>
-            <div id="alienKilled">0 - Killed aliens</div>
             <div class="line">
                 <div id="oxygen"><span style="width: 100%;"></span></div>
                 <div id="health"><span style="width: 100%;"></span></div>
             </div>
+            <div id="inventorySize">0 - Garbage collected</div>
+            <div id="killedAlien">0 - Aliens Killed</div>
         </div>
         <div id="defeat" style="display: none;">You are defeated<span></span></div>
     </div>
