@@ -1,0 +1,176 @@
+* {
+    box-sizing : content-box;
+    user-select: none;
+    font-family: monospace;
+    white-space: nowrap;
+}
+
+body {
+    background-color: #000;
+    display         : flex;
+    margin          : 0;
+    height          : 100vh;
+    overflow        : hidden;
+}
+
+#menu {
+    width            : 100%;
+    height           : 100%;
+    background-color : #000;
+    background-image : url("./Spaceman\ Illustration\ shared\ by\ Brianna\ Aus\ on\ We\ Heart\ It.jpg");
+    background-repeat: no-repeat;
+    background-size  : contain;
+}
+
+canvas {
+    background: url("./sprites/space-full-of-stars-seamless-texture-picture.png");
+}
+
+button {
+    background: none;
+    border    : 2px solid;
+    color     : #fff;
+    cursor    : pointer;
+    padding   : 10px 20px;
+    font-size : 20px;
+    transition: .2s;
+}
+button:hover {
+    transform: scale(1.1, 1.1);
+}
+#start_btn {
+    position  : absolute;
+    left      : 50%;
+    top       : 50%;
+    transform : translate(-50%, -50%);
+}
+
+#start_btn:hover {
+    transform: translate(-50%, -50%) scale(1.1, 1.1);
+}
+
+
+#stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    bottom  : 0px;
+    right   : 0px;
+    color   : #fff;
+    padding : 5px;
+}
+
+#stats .line>div {
+    position        : relative;
+    height          : 10px;
+    width           : 500px;
+    border          : 2px solid;
+    color           : #fff;
+    background-color: #fff;
+    margin          : 5px 0 5px 0;
+}
+
+#stats .line>div:last-child {
+    margin-bottom: 0;
+}
+
+
+#stats .line>div.warning {
+    box-shadow: 0 0 10px red, 0 0 7px red, 0 0 4px red;
+}
+
+#stats .line>div>span {
+    display : block;
+    position: absolute;
+    height  : 100%;
+}
+
+#stats #health>span {
+    background-color: red;
+}
+
+#stats #oxygen>span {
+    background-color: lightblue;
+}
+
+
+
+#defeat {
+    position  : absolute;
+    top       : 50%;
+    left      : 50%;
+    transform : translate(-50%, -50%);
+    color     : #fff;
+    font-size : 70px;
+    text-align: center;
+}
+
+#defeat span {
+    display   : block;
+    transition: .2s;
+    cursor    : pointer;
+    font-size : 50px;
+}
+
+#defeat span:hover {
+    transform: scale(1.1, 1.1);
+}
+
+
+
+#sortGame {
+    padding       : 50px;
+    display       : flex;
+    flex-direction: column;
+    width         : 100%;
+}
+
+#sortGame>div {
+    height         : 50%;
+    display        : flex;
+    flex-wrap      : wrap;
+    justify-content: center;
+    align-items    : flex-end;
+}
+
+
+#sortGame #inventory>span {
+    position: relative;
+    cursor  : pointer;
+
+    margin: 0 20px 0 20px;
+}
+
+#sortGame #inventory>span img {
+    max-width : 100px;
+    max-height: 100px;
+}
+
+#sortGame #inventory>span>span {
+    position   : absolute;
+    bottom     : 0;
+    right      : 0;
+    color      : #fff;
+    text-shadow: 0 0 5px #000, 0 0 5px #000, 0 0 5px #000;
+    font-size  : 30px;
+}
+
+
+
+
+
+#sortGame #garbageCans>img {
+    margin: 0 20px 0 20px;
+    height: 70%;
+    cursor: pointer;
+}
+
+#score {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 50px;
+}

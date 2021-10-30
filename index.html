@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="menu">
+        <button id="start_btn" style="display: block;">Start</button>
+    </div>
+    <div id="game" style="display: none;">
+        <canvas id="c"></canvas>
+        <div id="stats">
+            <div id="inventorySize">0 - Garbage collected</div>
+            <div id="alienKilled">0 - Killed aliens</div>
+            <div class="line">
+                <div id="oxygen"><span style="width: 100%;"></span></div>
+                <div id="health"><span style="width: 100%;"></span></div>
+            </div>
+        </div>
+        <div id="defeat" style="display: none;">You are defeated<span></span></div>
+    </div>
+    <div id="sortGame" style="display: none;">
+        <div id="inventory"></div>
+        <div id="garbageCans">
+            <img draggable="false" class="garbageCan" src="./sprites/garbageCans/Blue.svg" alt="">
+            <img draggable="false" class="garbageCan" src="./sprites/garbageCans/Grean.svg" alt="">
+            <img draggable="false" class="garbageCan" src="./sprites/garbageCans/Red.svg" alt="">
+            <img draggable="false" class="garbageCan" src="./sprites/garbageCans/Orange.svg" alt="">
+        </div>
+        <span id="score">0 Score</span>
+    </div>
+    <script src="./src/js/AI.js"></script>
+    <script src="./src/js/sortGame.js"></script>
+    <script src="./src/js/objects.js"></script>
+    <script src="./src/js/index.js"></script>
+    <script src="./src/js/control.js"></script>
+</body>
+
+</html>
