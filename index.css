@@ -24,6 +24,7 @@ body {
 
 canvas {
     background: url("./sprites/space-full-of-stars-seamless-texture-picture.png");
+    cursor: url("./cursor.png") 0 0, default;
 }
 
 button {
