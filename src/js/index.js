@@ -15,13 +15,13 @@ var GameAudio;
 (function (GameAudio) {
     function Hit() {
         const a = new Audio("./audio/laser.mp3");
-        a.volume = 0.2;
+        a.volume = 0.4;
         return a;
     }
     GameAudio.Hit = Hit;
     function Music() {
         const a = new Audio("./audio/Anamnez - Звуки Космоса (AvdioTrik.com).mp3");
-        a.volume = 0.2;
+        a.volume = 0.4;
         return a;
     }
     GameAudio.Music = Music;
@@ -120,8 +120,12 @@ function start() {
     spawnAlienInterval = setInterval(spawnAlien, 3000);
     spawnAlien();
     _loop_stop = false;
+    fpsInterval = 1000 / 60;
+    then = Date.now();
+    startTime = then;
     loop();
 }
+let fpsInterval, then, startTime, now, elapsed;
 function resizeCanvas() {
     if (c.width != document.body.offsetWidth)
         c.width = document.body.offsetWidth;
@@ -131,17 +135,23 @@ function resizeCanvas() {
 function loop_stop() { _loop_stop = true; }
 let _loop_stop = false;
 function loop() {
+    now = Date.now();
+    elapsed = now - then;
+    console.log(elapsed <= fpsInterval, elapsed, fpsInterval);
     if (_loop_stop)
         return;
-    resizeCanvas();
-    ctx.clearRect(0, 0, c.width, c.height);
-    all_objects.forEach(obj => {
-        if (obj instanceof Objects.GameObject) {
-            logic(obj);
-            physics(obj);
-        }
-        draw(obj);
-    });
+    if (elapsed > fpsInterval) {
+        then = now - (elapsed % fpsInterval);
+        resizeCanvas();
+        ctx.clearRect(0, 0, c.width, c.height);
+        all_objects.forEach(obj => {
+            if (obj instanceof Objects.GameObject) {
+                logic(obj);
+                physics(obj);
+            }
+            draw(obj);
+        });
+    }
     requestAnimationFrame(loop);
 }
 ;

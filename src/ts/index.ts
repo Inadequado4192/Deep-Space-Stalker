@@ -139,8 +139,15 @@ function start() {
     spawnAlien();
 
     _loop_stop = false;
+
+
+    fpsInterval = 1000 / 60;
+    then = Date.now();
+    startTime = then;
+
     loop();
 }
+let fpsInterval: number, then: number, startTime: number, now: number, elapsed: number;
 
 
 
@@ -158,17 +165,26 @@ function loop_stop() { _loop_stop = true; }
 let _loop_stop = false;
 function loop() {
     if (_loop_stop) return;
-    resizeCanvas();
-    ctx.clearRect(0, 0, c.width, c.height);
 
-    all_objects.forEach(obj => {
-        if (obj instanceof Objects.GameObject) {
-            logic(obj);
-            physics(obj);
-        }
-        draw(obj);
-    });
-
+    now = Date.now();
+    elapsed = now - then;
+    if (elapsed > fpsInterval) {
+        then = now - (elapsed % fpsInterval);
+    
+    
+        resizeCanvas();
+        ctx.clearRect(0, 0, c.width, c.height);
+    
+        all_objects.forEach(obj => {
+            if (obj instanceof Objects.GameObject) {
+                logic(obj);
+                physics(obj);
+            }
+            draw(obj);
+        });
+    
+    }
+    
     requestAnimationFrame(loop);
 };
 
