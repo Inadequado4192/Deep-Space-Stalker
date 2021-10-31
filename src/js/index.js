@@ -135,11 +135,10 @@ function resizeCanvas() {
 function loop_stop() { _loop_stop = true; }
 let _loop_stop = false;
 function loop() {
-    now = Date.now();
-    elapsed = now - then;
-    console.log(elapsed <= fpsInterval, elapsed, fpsInterval);
     if (_loop_stop)
         return;
+    now = Date.now();
+    elapsed = now - then;
     if (elapsed > fpsInterval) {
         then = now - (elapsed % fpsInterval);
         resizeCanvas();

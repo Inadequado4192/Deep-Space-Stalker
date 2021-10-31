@@ -381,7 +381,7 @@ var Objects;
                 this.sprite_width = 105;
                 this.sprite_height = 263;
                 this.size = 3;
-                this.healthMax = 10000;
+                this.healthMax = 5000;
                 this._health = this.healthMax;
                 this.reload = 5000;
                 this.damage = 200;
