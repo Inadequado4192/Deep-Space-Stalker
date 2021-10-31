@@ -442,7 +442,7 @@ namespace Objects {
             sprite_width = 105;
             sprite_height = 263;
             size = 3;
-            healthMax = 10000;
+            healthMax = 5000;
             _health = this.healthMax;
             reload = 5000;
             damage = 200;
