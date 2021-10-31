@@ -2,6 +2,7 @@
 const c = document.querySelector("canvas#c");
 const ctx = c.getContext("2d");
 const menu = document.querySelector("#menu");
+const tutorialElem = document.querySelector("#tutorial");
 const gameElem = document.querySelector("#game");
 const sortGameElem = document.querySelector("#sortGame");
 const healthSpanElem = document.querySelector("#health > span");
@@ -9,6 +10,7 @@ const oxygenSpanElem = document.querySelector("#oxygen > span");
 const defeatElem = document.querySelector("#defeat");
 const defeatSpanElem = document.querySelector("#defeat > span");
 const musicElem = document.querySelector("#music");
+const SquidGameLogoBoldElem = document.querySelector("#SquidGameLogoBold");
 const inventorySizeElem = document.querySelector("#inventorySize");
 const killedAlienElem = document.querySelector("#killedAlien");
 var GameAudio;
@@ -98,8 +100,18 @@ function spawnOxygenTank() {
     tank.inertia = new Point(random(random([[-1, -.5], [.5, 1]])), random(random([[-1, -.5], [.5, 1]])));
     tank.centerPoint = new Point(random([-tank.width, c.width + tank.width]), random([-tank.height, c.height + tank.height]));
 }
-const start_btn = document.querySelector("#start_btn");
-(start_btn).onclick = start;
+document.querySelector("#start_btn").onclick = start;
+document.querySelector("#tutorial_btn").onclick = () => {
+    tutorialElem.style.display = "block";
+    menu.style.display = "none";
+};
+let bg_i = 0;
+SquidGameLogoBoldElem.onclick = () => {
+    if (bg_i == 1)
+        c.style.background = `url("./sprites/bg1.png")`, bg_i--;
+    else
+        c.style.background = `url("./sprites/bg2.jpg")`, bg_i++;
+};
 let player;
 let spawnAlienInterval, spawnOxygenTankInterval;
 function start() {
@@ -112,7 +124,7 @@ function start() {
     menu.style.display = "none";
     defeatElem.style.display = "none";
     sortGameElem.style.display = "none";
-    c.style.opacity = "1";
+    c.style.filter = `brightness(1)`;
     resizeCanvas();
     player = new Objects.Astronaut({ centerPoint: new Point(c.width / 2, c.height / 2) });
     player.health = player.health;
@@ -270,5 +282,5 @@ function defeat() {
         defeatSpanElem.innerHTML = "Try Again";
     }
     defeatElem.style.display = "block";
-    c.style.opacity = "0.5";
+    c.style.filter = `brightness(0.5)`;
 }

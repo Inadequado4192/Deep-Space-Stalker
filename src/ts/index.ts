@@ -2,6 +2,7 @@ const c = <HTMLCanvasElement>document.querySelector("canvas#c");
 const ctx = <CanvasRenderingContext2D>c.getContext("2d");
 
 const menu = <HTMLElement>document.querySelector("#menu");
+const tutorialElem = <HTMLElement>document.querySelector("#tutorial");
 const gameElem = <HTMLElement>document.querySelector("#game");
 const sortGameElem = <HTMLElement>document.querySelector("#sortGame");
 const healthSpanElem = <HTMLElement>document.querySelector("#health > span");
@@ -9,6 +10,7 @@ const oxygenSpanElem = <HTMLElement>document.querySelector("#oxygen > span");
 const defeatElem = <HTMLElement>document.querySelector("#defeat");
 const defeatSpanElem = <HTMLElement>document.querySelector("#defeat > span");
 const musicElem = <HTMLElement>document.querySelector("#music");
+const SquidGameLogoBoldElem = <HTMLElement>document.querySelector("#SquidGameLogoBold");
 
 const inventorySizeElem = <HTMLElement>document.querySelector("#inventorySize");
 const killedAlienElem = <HTMLElement>document.querySelector("#killedAlien");
@@ -114,8 +116,16 @@ function spawnOxygenTank() {
 
 
 
-const start_btn = <HTMLElement>document.querySelector("#start_btn");
-(start_btn).onclick = start
+(<HTMLElement>document.querySelector("#start_btn")).onclick = start;
+(<HTMLElement>document.querySelector("#tutorial_btn")).onclick = () => {
+    tutorialElem.style.display = "block";
+    menu.style.display = "none";
+}
+let bg_i = 0;
+SquidGameLogoBoldElem.onclick = () => {
+    if (bg_i == 1) c.style.background = `url("./sprites/bg1.png")`, bg_i--;
+    else c.style.background = `url("./sprites/bg2.jpg")`, bg_i++;
+}
 
 let player: Objects.Astronaut;
 let spawnAlienInterval: number, spawnOxygenTankInterval: number;
@@ -127,7 +137,7 @@ function start() {
     menu.style.display = "none";
     defeatElem.style.display = "none";
     sortGameElem.style.display = "none";
-    c.style.opacity = "1";
+    c.style.filter = `brightness(1)`;
 
 
     resizeCanvas();
@@ -318,7 +328,7 @@ function defeat() {
         defeatSpanElem.innerHTML = "Try Again"
     }
     defeatElem.style.display = "block";
-    c.style.opacity = "0.5";
+    c.style.filter = `brightness(0.5)`;
 }
 
 // "resolveJsonModule": true,

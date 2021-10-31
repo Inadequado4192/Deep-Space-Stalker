@@ -16,10 +16,13 @@
         </div>
         <h1>Deep Space Stalker</h1>
         <button id="start_btn">Start</button>
-        <button id="tutorial">Tutorial</button>
+        <button id="tutorial_btn">Tutorial</button>
+    </div>
+    <div id="tutorial" style="display: none;">
+        <img draggable="false" src="./tutorial_tmp.png" alt="" style="width: 100%;">
     </div>
     <div id="game" style="display: none;">
-        <canvas id="c"></canvas>
+        <canvas id="c" style='background: url("./sprites/bg1.png");'></canvas>
         <div id="stats">
             <div class="line">
                 <div id="oxygen"><span style="width: 100%;"></span></div>
@@ -29,6 +32,7 @@
             <div id="killedAlien">0 - Aliens Killed</div>
         </div>
         <div id="defeat" style="display: none;">You are defeated<span></span></div>
+        <img id="SquidGameLogoBold" src="./SquidGameLogoBold.png" alt="Squid_Game_Logo_Bold">
     </div>
     <div id="sortGame" style="display: none;">
         <div id="inventory"></div>
