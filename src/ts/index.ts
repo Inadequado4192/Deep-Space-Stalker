@@ -20,12 +20,12 @@ const killedAlienElem = <HTMLElement>document.querySelector("#killedAlien");
 namespace GameAudio {
     export function Hit() {
         const a = new Audio("./audio/laser.mp3");
-        a.volume = 0.4;
+        a.volume = 0.1;
         return a;
     }
     export function Music() {
         const a = new Audio("./audio/Anamnez - Звуки Космоса (AvdioTrik.com).mp3");
-        a.volume = 0.4;
+        a.volume = 0.2;
         return a;
     }
 }
