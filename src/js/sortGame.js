@@ -82,24 +82,10 @@ function addScoreFn() {
     if (_stop_addScore)
         return;
     let power = 1;
-    if (addScore < 5)
-        power /= 5;
-    else if (addScore < 10)
-        power /= 4;
-    else if (addScore < 20)
-        power /= 3;
-    else if (addScore < 30)
-        power /= 2;
-    else if (addScore < 100)
-        power /= 1;
-    else if (addScore < 200)
-        power /= 0.5;
-    else if (addScore < 500)
-        power /= 0.1;
-    else if (addScore < 700)
-        power /= 0.05;
-    else if (addScore < 1000)
-        power /= 0.01;
+    if (addScore < 2)
+        power /= 10;
+    else
+        power *= addScore / 50;
     if (addScore > 0) {
         addScore -= power;
         score += power;

@@ -120,10 +120,7 @@ function start() {
     inventorySizeElem.innerHTML = "0 - Garbage collected";
     all_objects.clear();
     Objects.Aliens.Alien.all.clear();
-    gameElem.style.display = "block";
-    menu.style.display = "none";
-    defeatElem.style.display = "none";
-    sortGameElem.style.display = "none";
+    showDiv("game");
     c.style.filter = `brightness(1)`;
     resizeCanvas();
     player = new Objects.Astronaut({ centerPoint: new Point(c.width / 2, c.height / 2) });
@@ -146,6 +143,11 @@ function resizeCanvas() {
     if (c.height != document.body.offsetHeight)
         c.height = document.body.offsetHeight;
 }
+let fps_counter = 0;
+setInterval(() => {
+    document.querySelector("#fps").innerHTML = `${fps_counter} FPS`;
+    fps_counter = 0;
+}, 1000);
 function loop_stop() { _loop_stop = true; }
 let _loop_stop = false;
 function loop() {
@@ -165,6 +167,7 @@ function loop() {
             draw(obj);
         });
     }
+    fps_counter++;
     requestAnimationFrame(loop);
 }
 ;
@@ -283,4 +286,10 @@ function defeat() {
     }
     defeatElem.style.display = "block";
     c.style.filter = `brightness(0.5)`;
+}
+function showDiv(id) {
+    document.querySelectorAll("body > div").forEach(div => {
+        div.style.display = "none";
+    });
+    document.getElementById(id).style.display = "block";
 }

@@ -133,10 +133,11 @@ function start() {
     killedAlien = 0; killedAlienElem.innerHTML = "0 - Aliens Killed"; inventorySizeElem.innerHTML = "0 - Garbage collected";
     all_objects.clear();
     Objects.Aliens.Alien.all.clear();
-    gameElem.style.display = "block";
-    menu.style.display = "none";
-    defeatElem.style.display = "none";
-    sortGameElem.style.display = "none";
+    // gameElem.style.display = "block";
+    // menu.style.display = "none";
+    // defeatElem.style.display = "none";
+    // sortGameElem.style.display = "none";
+    showDiv("game");
     c.style.filter = `brightness(1)`;
 
 
@@ -174,6 +175,12 @@ function resizeCanvas() {
     if (c.height != document.body.offsetHeight) c.height = document.body.offsetHeight;
 }
 
+let fps_counter = 0;
+setInterval(() => {
+    (<HTMLElement>document.querySelector("#fps")).innerHTML = `${fps_counter} FPS`
+    fps_counter = 0;
+}, 1000);
+
 function loop_stop() { _loop_stop = true; }
 let _loop_stop = false;
 function loop() {
@@ -183,11 +190,11 @@ function loop() {
     elapsed = now - then;
     if (elapsed > fpsInterval) {
         then = now - (elapsed % fpsInterval);
-    
-    
+
+
         resizeCanvas();
         ctx.clearRect(0, 0, c.width, c.height);
-    
+
         all_objects.forEach(obj => {
             if (obj instanceof Objects.GameObject) {
                 logic(obj);
@@ -195,9 +202,9 @@ function loop() {
             }
             draw(obj);
         });
-    
+
     }
-    
+    fps_counter++;
     requestAnimationFrame(loop);
 };
 
@@ -332,3 +339,13 @@ function defeat() {
 }
 
 // "resolveJsonModule": true,
+
+
+
+
+function showDiv(id: string) {
+    document.querySelectorAll<HTMLDivElement>("body > div").forEach(div => {
+        div.style.display = "none";
+    });
+    (<HTMLDivElement>document.getElementById(id)).style.display = "block";
+}
