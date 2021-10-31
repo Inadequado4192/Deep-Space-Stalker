@@ -98,8 +98,11 @@ function spawnAlien() {
         random([-Alien.height, c.height + Alien.height]));
     Alien.inertia = new Point(random(-10, 10), random(-10, 10));
 }
+
+let oxygenTankLength = 0;
 function spawnOxygenTank() {
-    if (Array.from(all_objects).filter(o => o instanceof Objects.Oxygen).length >= 2) return;
+    if (oxygenTankLength >= 2) return;
+    oxygenTankLength++;
 
     let tank = new Objects.Oxygen({ centerPoint: new Point(random(0, c.width), random(0, c.height)), });
     tank.inertia = new Point(random(random([[-1, -.5], [.5, 1]])), random(random([[-1, -.5], [.5, 1]])));
@@ -235,6 +238,7 @@ function logic(obj: Objects.GameObject) {
             if (o instanceof Objects.Oxygen) {
                 o.delete();
                 obj.oxygen = obj.oxygenMax;
+                oxygenTankLength--;
             }
             else if (o instanceof Objects.Trash.Trash) {
                 obj.inventory.add(o);
@@ -242,8 +246,8 @@ function logic(obj: Objects.GameObject) {
                 o.delete();
             }
         }
-        if (obj.oxygen > 0) obj.oxygen--;
-        else obj.health--;
+        if (obj.oxygen > 0) obj.oxygen -= 0.5;
+        else obj.health -= 0.5;
     }
 
     if (obj instanceof Objects.Laser) {

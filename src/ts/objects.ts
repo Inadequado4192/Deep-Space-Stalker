@@ -59,7 +59,6 @@ namespace Objects {
 
                 for (let p of squarePoints)
                     if (p.inSquare(o.SquarePoints())) return c.add(o);
-
             });
             return c;
         }
