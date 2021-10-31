@@ -7,7 +7,7 @@
 
 body {
     background-color : #000;
-    background-image : url("./Spaceman\ Illustration\ shared\ by\ Brianna\ Aus\ on\ We\ Heart\ It.jpg");
+    background-image : url("./img/Spaceman\ Illustration\ shared\ by\ Brianna\ Aus\ on\ We\ Heart\ It.jpg");
     background-repeat: no-repeat;
     background-size  : contain;
     display          : flex;
@@ -54,7 +54,7 @@ body {
 }
 
 canvas {
-    cursor    : url("./cursor.png") 16 16, default;
+    cursor    : url("./img/cursor.png") 16 16, default;
     transition: 1s;
 }
 
